@@ -1,6 +1,4 @@
-# tach-fixer
-
-The purpose of this code is to fix the tachometer reading on Snoopy, a 32 foot sailboat with a diesel engine.
+This project fixes the tachometer reading on Snoopy, a 32 foot sailboat.
 
 # The Problem
 
