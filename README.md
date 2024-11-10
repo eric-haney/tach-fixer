@@ -3,11 +3,13 @@ This project fixes the tachometer reading on Snoopy, a 32 foot sailboat.
 # The Problem
 
 A diesel does not have an ignition system, so the input to the tachometer is a sine-wave from the alternator.
-The alternator is belt driven, so pulley sizing and alternator design affect the reading on the tachometer.
+The alternator is belt driven, so pulley sizing and alternator design (number of poles) affect the reading on the tachometer.
 To calibrate the RPM reading, the tachometer has a 5-position selector on the back that is adjustable with a screwdriver.
 
-In the case of Snoopy, none of those 5 positions is anywhere near accurate.
+In the case of this boat, none of those 5 positions is anywhere near accurate.
+Actual RPM was measured using a handheld device pointed at reflective tape on the crankshaft.
 The slowest selector position still produces an RPM approximately 2x too fast.
+
 
 # The Solution
 
@@ -29,3 +31,7 @@ To adjust the `calibrationFactor`:
 - Open a browser to `http://192.168.4.1/`
 - The current input frequency, output frequency and calibration factor will be displayed
 - To update the calibration factor change the URL to `http://192.168.4.1/calibrate/892`
+
+# Schematic:
+
+![schematic](https://github.com/eric-haney/tach-fixer/blob/main/schematic.png?raw=true)
