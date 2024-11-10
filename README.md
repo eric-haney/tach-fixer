@@ -21,7 +21,7 @@ The frequency ratio can be calibrated by setting a `calibrationFactor`.  Example
 | ----------------- | ------ | ------------- | -------------- |
 | 1000              | none   | 500 hz        | 500 hz         |
 | 500               | /2     | 500 hz        | 250 hz         |
-| 1000              | x2     | 500 hz        | 1000 hz        |
+| 2000              | x2     | 500 hz        | 1000 hz        |
 
 To adjust the `calibrationFactor`:
 
