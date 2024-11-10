@@ -6,7 +6,7 @@ A diesel engine does not have an ignition system, so the input to the tachometer
 The alternator is belt driven, so pulley sizing and alternator design (number of poles) affect the reading on the tachometer.
 To calibrate the RPM reading, the tachometer has a 5-position selector on the back that is adjustable with a screwdriver.
 
-In the case of this boat, none of those 5 positions is anywhere near accurate.
+In the case of this boat, none of those 5 positions are anywhere near accurate.
 Actual RPM was measured using a handheld device pointed at reflective tape on the crankshaft.
 The slowest selector position still produces an RPM approximately 2x too fast.
 
