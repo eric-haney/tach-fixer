@@ -1,5 +1,11 @@
 #include <WiFi.h>
 
+#include <Preferences.h>
+
+Preferences preferences;
+const char* PREFERENCES_NAMESPACE       = "tach";
+const char* PREFERENCES_CALIBRATION_KEY = "cal";
+
 const int STARTUP_PIN    = 15;  // Controls whether the wifi access point and webserver are started.
 const int SIGNAL_IN_PIN  = 36;  // Signal in, from alternator.  Must be 32-39.  The others don't work when wifi is on.
 const int SIGNAL_OUT_PIN = 2;   // Signal out, to tachometer.
@@ -24,20 +30,21 @@ void setup() {
   // set the ADC attenuation to 11 dB (up to ~3.3V input)
   analogSetAttenuation(ADC_11db);
   
-  // TODO: read calibrationFactor from preferences
-
-  pinMode(STARTUP_PIN, INPUT);
-  enableWebServer = digitalRead(STARTUP_PIN) == HIGH;
-
+  pinMode(STARTUP_PIN, INPUT_PULLUP);
   pinMode(SIGNAL_IN_PIN, INPUT);
   pinMode(SIGNAL_OUT_PIN, OUTPUT);
 
   ledcAttachPin(SIGNAL_OUT_PIN, LEDC_CHANNEL);
 
+  enableWebServer = digitalRead(STARTUP_PIN) == LOW;
+
   if (enableWebServer) {
     setupWifi();
   }
 
+  preferences.begin(PREFERENCES_NAMESPACE, true);
+  calibrationFactor = preferences.getInt(PREFERENCES_CALIBRATION_KEY, 600);
+  preferences.end();
 }
 
 void loop(){
@@ -59,7 +66,9 @@ bool setCalibrationFactor(int newCalibrationFactor) {
 
   if (newCalibrationFactor > 0 && newCalibrationFactor < 100000) {
     calibrationFactor = newCalibrationFactor;
-    // TODO: write calibrationFactor to preferences
+    preferences.begin(PREFERENCES_NAMESPACE, false);
+    preferences.putInt(PREFERENCES_CALIBRATION_KEY, calibrationFactor);
+    preferences.end();
     return true;
   }
   return false;
@@ -212,7 +221,8 @@ void calculateOutputFrequency() {
   Serial.print(inputFrequency);
   Serial.print(" * (");
   Serial.print(calibrationFactor);
-  Serial.println(" / 1000)");
+  Serial.print(" / 1000) = ");
+  Serial.println(outputFrequency);
 
   if (outputFrequency == 0) {
     ledcWrite(LEDC_CHANNEL, 0);
