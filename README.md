@@ -1,8 +1,8 @@
-This project fixes the tachometer reading on Snoopy, a 32 foot sailboat.
+This project fixes the tachometer reading on a 32 foot sailboat.
 
 # The Problem
 
-A diesel does not have an ignition system, so the input to the tachometer is a sine-wave from the alternator.
+A diesel engine does not have an ignition system, so the input to the tachometer is a sine-wave from the alternator.
 The alternator is belt driven, so pulley sizing and alternator design (number of poles) affect the reading on the tachometer.
 To calibrate the RPM reading, the tachometer has a 5-position selector on the back that is adjustable with a screwdriver.
 
