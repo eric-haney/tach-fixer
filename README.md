@@ -8,12 +8,12 @@ To calibrate the RPM reading, the tachometer has a 5-position selector on the ba
 
 In the case of this boat, none of those 5 positions are anywhere near accurate.
 Actual RPM was measured using a handheld device pointed at reflective tape on the crankshaft.
-The slowest selector position still produces an RPM approximately 2x too fast.
+The slowest selector position still produces a tachometer reading approximately 2x too high.
 
 
 # The Solution
 
-This code runs on a $6 microcontroller development board called ESP32-DOIT-DEV-KIT-V1.
+This code was developed for a ESP32-DOIT-DEV-KIT-V1.
 The board is powered by the ignition system of the boat and modifies the ~14v sine-wave from the alternator into a square-wave of a lower frequency.
 The frequency ratio can be calibrated by setting a `calibrationFactor`.  Examples:
 
