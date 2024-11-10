@@ -170,7 +170,7 @@ const int AVG_THRESHOLD = (RISING_THRESHOLD + FALLING_THRESHOLD) / 2;
 int readInputFrequency() {
   unsigned long startTime = millis();
   uint8_t halfPulseCount = 0;
-  unsigned long firstPulseTime = 0;
+  unsigned long firstPulseMillis = 0;
   uint8_t oldState = (getInputVoltage() < AVG_THRESHOLD) ? LOW : HIGH;
   int inputVoltage = 0;
 
@@ -184,17 +184,16 @@ int readInputFrequency() {
     if (oldState == LOW && inputVoltage > RISING_THRESHOLD) {
       oldState = HIGH;
       halfPulseCount++;
-      if (firstPulseTime == 0) {
-      
-        firstPulseTime = millis();
+      if (firstPulseMillis == 0) {
+        firstPulseMillis = millis();
       }
     }
 
     if (oldState == HIGH && inputVoltage < FALLING_THRESHOLD) {
       oldState = LOW;
       halfPulseCount++;
-      if (firstPulseTime == 0) {
-        firstPulseTime = millis();
+      if (firstPulseMillis == 0) {
+        firstPulseMillis = millis();
       }
     }
   }
@@ -204,10 +203,10 @@ int readInputFrequency() {
 //  Serial.print(" * 1000) / (");
 //  Serial.print(millis());
 //  Serial.print(" - ");
-//  Serial.print(firstPulseTime);
+//  Serial.print(firstPulseMillis);
 //  Serial.println(")) / 2");
 
-  return (int) ((halfPulseCount * 1000) / (millis() - firstPulseTime)) / 2;
+  return (int) ((halfPulseCount * 1000) / (millis() - firstPulseMillis)) / 2;
 }
 
 int getInputVoltage() {
